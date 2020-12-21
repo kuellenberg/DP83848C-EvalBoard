@@ -356,7 +356,7 @@ AR Path="/6065AB99" Ref="J?"  Part="1"
 AR Path="/6062FABA/6065AB99" Ref="J10"  Part="1" 
 F 0 "J10" H 9250 1900 50  0000 C CNN
 F 1 "RJ45_LED_Shielded" H 9400 2900 50  0000 C CNN
-F 2 "Connector_RJ:RJ45_Hanrun_HR911105A" V 9450 2375 50  0001 C CNN
+F 2 "Connector_RJ:RJ45_Amphenol_RJHSE538X" V 9450 2375 50  0001 C CNN
 F 3 "~" V 9450 2375 50  0001 C CNN
 	1    9450 2350
 	-1   0    0    1   
@@ -1296,7 +1296,7 @@ Wire Wire Line
 Wire Wire Line
 	5850 4200 5850 4550
 $Comp
-L Device:C_Small C?
+L Device:CP_Small C?
 U 1 1 60AA936A
 P 5850 4650
 AR Path="/60AA936A" Ref="C?"  Part="1" 
@@ -1844,7 +1844,7 @@ Wire Wire Line
 Wire Wire Line
 	3100 900  3100 850 
 $Comp
-L Device:C_Small C?
+L Device:CP_Small C?
 U 1 1 60B06127
 P 3100 1000
 AR Path="/60B06127" Ref="C?"  Part="1" 
