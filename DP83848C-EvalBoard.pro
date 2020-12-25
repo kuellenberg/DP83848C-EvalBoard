@@ -1,4 +1,4 @@
-update=Tue 22 Dec 2020 08:22:15 PM CET
+update=25.12.2020 21:52:22
 version=1
 last_client=kicad
 [general]
@@ -45,8 +45,8 @@ ViaDiameter3=0.8
 ViaDrill3=0.4
 ViaDiameter4=1
 ViaDrill4=0.5
-dPairWidth1=0.15
-dPairGap1=0.15
+dPairWidth1=0.254
+dPairGap1=0.2032
 dPairViaGap1=0.25
 SilkLineWidth=0.12
 SilkTextSizeV=1
@@ -68,7 +68,7 @@ OthersTextSizeH=1
 OthersTextSizeThickness=0.15
 OthersTextItalic=0
 OthersTextUpright=1
-SolderMaskClearance=0
+SolderMaskClearance=0.05
 SolderMaskMinWidth=0
 SolderPasteClearance=0
 SolderPasteRatio=-0
@@ -247,8 +247,8 @@ ViaDiameter=0.6
 ViaDrill=0.3
 uViaDiameter=0.3
 uViaDrill=0.1
-dPairWidth=0.15
-dPairGap=0.15
+dPairWidth=0.254
+dPairGap=0.2032
 dPairViaGap=0.25
 [pcbnew/Netclasses/1]
 Name=Power
