@@ -781,7 +781,7 @@ Wire Wire Line
 Wire Wire Line
 	2000 3400 1300 3400
 Text Label 1800 3700 2    50   ~ 0
-SPI1_NSS
+SPI1_NSS_R
 Text Label 1800 3600 2    50   ~ 0
 SPI1_SCK_R
 Text Label 1800 3500 2    50   ~ 0
@@ -829,19 +829,6 @@ F 1 "33" V 2050 3450 50  0000 C CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" H 2100 3600 50  0001 C CNN
 F 3 "~" H 2100 3600 50  0001 C CNN
 	1    2100 3600
-	0    -1   1    0   
-$EndComp
-$Comp
-L Device:R_Small R?
-U 1 1 5FEF81D7
-P 2100 3700
-AR Path="/5FEF81D7" Ref="R?"  Part="1" 
-AR Path="/5FEAD3F6/5FEF81D7" Ref="R85"  Part="1" 
-F 0 "R85" V 2050 3850 50  0000 C CNN
-F 1 "33" V 2050 3550 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 2100 3700 50  0001 C CNN
-F 3 "~" H 2100 3700 50  0001 C CNN
-	1    2100 3700
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
@@ -1430,9 +1417,9 @@ Text HLabel 2400 6700 2    50   Input ~ 0
 USART3_TX
 Text HLabel 2400 6800 2    50   Input ~ 0
 USART3_RX
-Text Label 7150 1150 0    50   ~ 0
-ADC0_R
 Text Label 7150 1350 0    50   ~ 0
+ADC0_R
+Text Label 7150 1150 0    50   ~ 0
 ADC1_R
 Text Label 8850 1150 2    50   ~ 0
 ADC2_R
@@ -1442,12 +1429,12 @@ Text Label 8850 1350 2    50   ~ 0
 ADC3_R
 Text Label 9000 1350 0    50   ~ 0
 ADC5_R
-Text Label 10700 1150 2    50   ~ 0
-ADC6_R
 Text Label 10700 1350 2    50   ~ 0
+ADC6_R
+Text Label 10700 1150 2    50   ~ 0
 ADC7_R
 Text Label 5300 2550 2    50   ~ 0
-SPI1_NSS
+SPI1_NSS_R
 Text Label 5300 2750 2    50   ~ 0
 SPI1_SCK_R
 Text Label 3300 2550 0    50   ~ 0
@@ -2028,4 +2015,17 @@ Text Label 5600 3950 0    50   ~ 0
 USART2_TX_R
 Text Label 3300 3950 0    50   ~ 0
 USART3_TX_R
+$Comp
+L Device:R_Small R?
+U 1 1 5FEF81D7
+P 2100 3700
+AR Path="/5FEF81D7" Ref="R?"  Part="1" 
+AR Path="/5FEAD3F6/5FEF81D7" Ref="R85"  Part="1" 
+F 0 "R85" V 2050 3850 50  0000 C CNN
+F 1 "33" V 2050 3550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 2100 3700 50  0001 C CNN
+F 3 "~" H 2100 3700 50  0001 C CNN
+	1    2100 3700
+	0    -1   1    0   
+$EndComp
 $EndSCHEMATC
