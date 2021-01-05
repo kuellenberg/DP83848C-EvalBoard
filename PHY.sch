@@ -1249,10 +1249,6 @@ Wire Wire Line
 Wire Wire Line
 	2250 4300 2400 4300
 Wire Wire Line
-	2850 3200 2600 3200
-Text Notes 6900 4900 0    50   ~ 0
-MII Mode Select\nMII_MODE | SNI_MODE | MAC Interface Mode\n-----------------------------\n   0      |     X     | MII Mode (default)\n   1      |     0     | RMII Mode\n   1      |     1     | 10 Mb SNI Mode\n\ndefault values are 0
-Wire Wire Line
 	5850 4850 5850 4750
 Wire Wire Line
 	5850 4200 5850 4550
@@ -1274,182 +1270,32 @@ Wire Wire Line
 	1850 3500 2400 3500
 Text Label 1850 3200 0    50   ~ 0
 MII_MODE
-Text Label 1850 2200 0    50   ~ 0
-SNI_MODE
-Wire Wire Line
-	6900 5900 7250 5900
-$Comp
-L Device:R_Small R?
-U 1 1 60E34326
-P 7350 6150
-AR Path="/60E34326" Ref="R?"  Part="1" 
-AR Path="/6062FABA/60E34326" Ref="R31"  Part="1" 
-F 0 "R31" V 7454 6150 50  0000 C CNN
-F 1 "2.2k" V 7545 6150 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 7350 6150 50  0001 C CNN
-F 3 "~" H 7350 6150 50  0001 C CNN
-	1    7350 6150
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x03 JP2
-U 1 1 60E3432C
-P 7450 5900
-F 0 "JP2" H 7530 5896 50  0000 L CNN
-F 1 "Conn_01x03" H 7530 5851 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 7450 5900 50  0001 C CNN
-F 3 "~" H 7450 5900 50  0001 C CNN
-	1    7450 5900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7200 5800 7250 5800
-Wire Wire Line
-	7250 6000 7200 6000
-Wire Wire Line
-	7200 6000 7200 6150
-Wire Wire Line
-	7200 6150 7250 6150
-$Comp
-L power:GND #PWR?
-U 1 1 60E34336
-P 7550 6200
-AR Path="/60E34336" Ref="#PWR?"  Part="1" 
-AR Path="/6062FABA/60E34336" Ref="#PWR034"  Part="1" 
-F 0 "#PWR034" H 7550 5950 50  0001 C CNN
-F 1 "GND" H 7555 6027 50  0001 C CNN
-F 2 "" H 7550 6200 50  0001 C CNN
-F 3 "" H 7550 6200 50  0001 C CNN
-	1    7550 6200
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	7450 6150 7550 6150
-Wire Wire Line
-	7550 6150 7550 6200
-Wire Wire Line
-	7550 5650 7550 5600
-Wire Wire Line
-	7450 5650 7550 5650
 $Comp
 L power:+3V3 #PWR?
 U 1 1 60E34340
-P 7550 5600
+P 1650 3200
 AR Path="/60E34340" Ref="#PWR?"  Part="1" 
 AR Path="/6062FABA/60E34340" Ref="#PWR033"  Part="1" 
-F 0 "#PWR033" H 7550 5450 50  0001 C CNN
-F 1 "+3V3" H 7565 5773 50  0000 C CNN
-F 2 "" H 7550 5600 50  0001 C CNN
-F 3 "" H 7550 5600 50  0001 C CNN
-	1    7550 5600
-	-1   0    0    -1  
+F 0 "#PWR033" H 1650 3050 50  0001 C CNN
+F 1 "+3V3" V 1665 3328 50  0000 L CNN
+F 2 "" H 1650 3200 50  0001 C CNN
+F 3 "" H 1650 3200 50  0001 C CNN
+	1    1650 3200
+	0    -1   1    0   
 $EndComp
-Wire Wire Line
-	7200 5650 7200 5800
-Wire Wire Line
-	7250 5650 7200 5650
 $Comp
 L Device:R_Small R?
 U 1 1 60E34348
-P 7350 5650
+P 1750 3200
 AR Path="/60E34348" Ref="R?"  Part="1" 
 AR Path="/6062FABA/60E34348" Ref="R30"  Part="1" 
-F 0 "R30" V 7546 5650 50  0000 C CNN
-F 1 "2.2k" V 7455 5650 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 7350 5650 50  0001 C CNN
-F 3 "~" H 7350 5650 50  0001 C CNN
-	1    7350 5650
-	0    1    -1   0   
+F 0 "R30" V 1554 3200 50  0000 C CNN
+F 1 "2.2k" V 1645 3200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 1750 3200 50  0001 C CNN
+F 3 "~" H 1750 3200 50  0001 C CNN
+	1    1750 3200
+	0    -1   1    0   
 $EndComp
-Wire Wire Line
-	7750 5900 8100 5900
-$Comp
-L Device:R_Small R?
-U 1 1 60E34350
-P 8200 6150
-AR Path="/60E34350" Ref="R?"  Part="1" 
-AR Path="/6062FABA/60E34350" Ref="R33"  Part="1" 
-F 0 "R33" V 8304 6150 50  0000 C CNN
-F 1 "2.2k" V 8395 6150 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 8200 6150 50  0001 C CNN
-F 3 "~" H 8200 6150 50  0001 C CNN
-	1    8200 6150
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x03 JP3
-U 1 1 60E34356
-P 8300 5900
-F 0 "JP3" H 8380 5896 50  0000 L CNN
-F 1 "Conn_01x03" H 8380 5851 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 8300 5900 50  0001 C CNN
-F 3 "~" H 8300 5900 50  0001 C CNN
-	1    8300 5900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8050 5800 8100 5800
-Wire Wire Line
-	8100 6000 8050 6000
-Wire Wire Line
-	8050 6000 8050 6150
-Wire Wire Line
-	8050 6150 8100 6150
-$Comp
-L power:GND #PWR?
-U 1 1 60E34360
-P 8400 6200
-AR Path="/60E34360" Ref="#PWR?"  Part="1" 
-AR Path="/6062FABA/60E34360" Ref="#PWR036"  Part="1" 
-F 0 "#PWR036" H 8400 5950 50  0001 C CNN
-F 1 "GND" H 8405 6027 50  0001 C CNN
-F 2 "" H 8400 6200 50  0001 C CNN
-F 3 "" H 8400 6200 50  0001 C CNN
-	1    8400 6200
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	8300 6150 8400 6150
-Wire Wire Line
-	8400 6150 8400 6200
-Wire Wire Line
-	8400 5650 8400 5600
-Wire Wire Line
-	8300 5650 8400 5650
-$Comp
-L power:+3V3 #PWR?
-U 1 1 60E3436A
-P 8400 5600
-AR Path="/60E3436A" Ref="#PWR?"  Part="1" 
-AR Path="/6062FABA/60E3436A" Ref="#PWR035"  Part="1" 
-F 0 "#PWR035" H 8400 5450 50  0001 C CNN
-F 1 "+3V3" H 8415 5773 50  0000 C CNN
-F 2 "" H 8400 5600 50  0001 C CNN
-F 3 "" H 8400 5600 50  0001 C CNN
-	1    8400 5600
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	8050 5650 8050 5800
-Wire Wire Line
-	8100 5650 8050 5650
-$Comp
-L Device:R_Small R?
-U 1 1 60E34372
-P 8200 5650
-AR Path="/60E34372" Ref="R?"  Part="1" 
-AR Path="/6062FABA/60E34372" Ref="R32"  Part="1" 
-F 0 "R32" V 8396 5650 50  0000 C CNN
-F 1 "2.2k" V 8305 5650 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 8200 5650 50  0001 C CNN
-F 3 "~" H 8200 5650 50  0001 C CNN
-	1    8200 5650
-	0    1    -1   0   
-$EndComp
-Text Label 6900 5900 0    50   ~ 0
-MII_MODE
-Text Label 7750 5900 0    50   ~ 0
-SNI_MODE
 $Comp
 L Device:R_Small R?
 U 1 1 60E70987
@@ -1495,8 +1341,6 @@ F 3 "~" H 2500 2400 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	2400 2400 1850 2400
-Wire Wire Line
-	2850 2200 2600 2200
 Wire Wire Line
 	2850 3000 2600 3000
 $Comp
@@ -1590,36 +1434,6 @@ Text HLabel 1850 3500 0    50   Input ~ 0
 ETH_CRS_DV
 $Comp
 L Device:R_Small R?
-U 1 1 6123E5AC
-P 2500 3200
-AR Path="/6123E5AC" Ref="R?"  Part="1" 
-AR Path="/6062FABA/6123E5AC" Ref="R17"  Part="1" 
-F 0 "R17" V 2550 3350 50  0000 C CNN
-F 1 "33" V 2550 3050 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 2500 3200 50  0001 C CNN
-F 3 "~" H 2500 3200 50  0001 C CNN
-	1    2500 3200
-	0    1    -1   0   
-$EndComp
-Wire Wire Line
-	2400 3200 1850 3200
-$Comp
-L Device:R_Small R?
-U 1 1 6123E89A
-P 2500 2200
-AR Path="/6123E89A" Ref="R?"  Part="1" 
-AR Path="/6062FABA/6123E89A" Ref="R8"  Part="1" 
-F 0 "R8" V 2550 2350 50  0000 C CNN
-F 1 "33" V 2550 2050 50  0000 C CNN
-F 2 "Resistor_SMD:R_0402_1005Metric" H 2500 2200 50  0001 C CNN
-F 3 "~" H 2500 2200 50  0001 C CNN
-	1    2500 2200
-	0    1    -1   0   
-$EndComp
-Wire Wire Line
-	2400 2200 1850 2200
-$Comp
-L Device:R_Small R?
 U 1 1 6123F332
 P 2500 3500
 AR Path="/6123F332" Ref="R?"  Part="1" 
@@ -1633,14 +1447,6 @@ F 3 "~" H 2500 3500 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	2600 3500 2850 3500
-Wire Notes Line
-	6800 4150 8750 4150
-Wire Notes Line
-	8750 4150 8750 6450
-Wire Notes Line
-	8750 6450 6800 6450
-Wire Notes Line
-	6800 6450 6800 4150
 Wire Notes Line
 	8800 4150 8800 6450
 Wire Notes Line
@@ -2011,10 +1817,10 @@ F 3 "~" H 8550 3500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:Earth #PWR?
+L power:Earth #PWR0117
 U 1 1 5FFD1A34
 P 9250 1800
-F 0 "#PWR?" H 9250 1550 50  0001 C CNN
+F 0 "#PWR0117" H 9250 1550 50  0001 C CNN
 F 1 "Earth" H 9250 1650 50  0001 C CNN
 F 2 "" H 9250 1800 50  0001 C CNN
 F 3 "~" H 9250 1800 50  0001 C CNN
@@ -2022,14 +1828,17 @@ F 3 "~" H 9250 1800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:Earth #PWR?
+L power:Earth #PWR0118
 U 1 1 5FFD1E16
 P 9250 1500
-F 0 "#PWR?" H 9250 1250 50  0001 C CNN
+F 0 "#PWR0118" H 9250 1250 50  0001 C CNN
 F 1 "Earth" H 9250 1350 50  0001 C CNN
 F 2 "" H 9250 1500 50  0001 C CNN
 F 3 "~" H 9250 1500 50  0001 C CNN
 	1    9250 1500
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	1850 3200 2850 3200
+NoConn ~ 2850 2200
 $EndSCHEMATC
