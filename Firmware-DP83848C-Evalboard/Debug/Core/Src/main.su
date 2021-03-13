@@ -1,0 +1,11 @@
+main.c:66:13:mqtt_connection_cb	32	static
+main.c:90:6:example_do_connect	64	static
+main.c:118:13:mqtt_pub_request_cb	16	static
+main.c:128:6:example_publish	40	static
+main.c:140:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:157:5:main	8	static
+main.c:210:6:SystemClock_Config	88	static
+main.c:254:13:MX_TIM3_Init	32	static
+main.c:299:13:MX_USB_OTG_FS_PCD_Init	8	static
+main.c:334:13:MX_GPIO_Init	48	static
+main.c:365:6:Error_Handler	4	static,ignoring_inline_asm

@@ -355,4 +355,6 @@ F 3 "~" H 9850 6150 50  0001 C CNN
 	1    9850 6150
 	1    0    0    -1  
 $EndComp
+Text Notes 5300 4200 0    118  ~ 0
+Fix:\n- LED series resistors (R1, R3, R42, R45, R46)  should be ~~1k\n- connect ethernet ref clock to MCU pin 24 (PA1)\n- R57 should be 33 ohms 
 $EndSCHEMATC
