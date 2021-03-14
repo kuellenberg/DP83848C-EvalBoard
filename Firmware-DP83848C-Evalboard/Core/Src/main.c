@@ -20,10 +20,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "lwip.h"
+#include "usb_device.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lwip/apps/mqtt.h"
+#include "usbd_cdc_if.h"
 
 /* USER CODE END Includes */
 
@@ -44,17 +46,19 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim3;
 
-PCD_HandleTypeDef hpcd_USB_OTG_FS;
-
 /* USER CODE BEGIN PV */
+
+
 mqtt_client_t *client;
+char txBuf[100];
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM3_Init(void);
-static void MX_USB_OTG_FS_PCD_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -62,24 +66,81 @@ static void MX_USB_OTG_FS_PCD_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+static int inpub_id;
+
+static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len, u8_t flags)
+{
+  sprintf(txBuf, "Incoming publish payload with length %d, flags %u\n", len, (unsigned int)flags);
+  CDC_Transmit_FS(txBuf, strlen(txBuf));
+
+  if(flags & MQTT_DATA_FLAG_LAST) {
+    /* Last fragment of payload received (or whole part if payload fits receive buffer
+       See MQTT_VAR_HEADER_BUFFER_LEN)  */
+
+    /* Call function or do action depending on reference, in this case inpub_id */
+    if(inpub_id == 0) {
+      /* Don't trust the publisher, check zero termination */
+      if(data[len-1] == 0) {
+        sprintf(txBuf, "mqtt_incoming_data_cb: %s\n", (const char *)data);
+        CDC_Transmit_FS(txBuf, strlen(txBuf));
+      }
+    } else if(inpub_id == 1) {
+      /* Call an 'A' function... */
+    } else {
+      sprintf(txBuf, "mqtt_incoming_data_cb: Ignoring payload...\n");
+      CDC_Transmit_FS(txBuf, strlen(txBuf));
+    }
+  } else {
+    /* Handle fragmented payload, store in buffer, write to file or whatever */
+  }
+}
+
+static void mqtt_incoming_publish_cb(void *arg, const char *topic, u32_t tot_len)
+{
+  sprintf(txBuf, "Incoming publish at topic %s with total length %u\n", topic, (unsigned int)tot_len);
+  CDC_Transmit_FS(txBuf, strlen(txBuf));
+
+  /* Decode topic string into a user defined reference */
+  if(strcmp(topic, "test") == 0) {
+    inpub_id = 0;
+  } else if(topic[0] == 'A') {
+    /* All topics starting with 'A' might be handled at the same way */
+    inpub_id = 1;
+  } else {
+    /* For all other topics */
+    inpub_id = 2;
+  }
+}
+
+static void mqtt_sub_request_cb(void *arg, err_t result)
+{
+  /* Just print the result code here for simplicity,
+     normal behaviour would be to take some action if subscribe fails like
+     notifying user, retry subscribe or disconnect from server */
+  sprintf(txBuf, "Subscribe result: %d\n", result);
+  CDC_Transmit_FS(txBuf, strlen(txBuf));
+}
 
 static void mqtt_connection_cb(mqtt_client_t *client, void *arg, mqtt_connection_status_t status)
 {
   err_t err;
   if(status == MQTT_CONNECT_ACCEPTED) {
-    printf("mqtt_connection_cb: Successfully connected\n");
+    sprintf(txBuf, "mqtt_connection_cb: Successfully connected\n");
+	CDC_Transmit_FS(txBuf, strlen(txBuf));
 
     /* Setup callback for incoming publish requests */
-    //mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb, mqtt_incoming_data_cb, arg);
+    mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb, mqtt_incoming_data_cb, arg);
 
     /* Subscribe to a topic named "subtopic" with QoS level 1, call mqtt_sub_request_cb with result */
-    //err = mqtt_subscribe(client, "subtopic", 1, mqtt_sub_request_cb, arg);
+    err = mqtt_subscribe(client, "moo", 1, mqtt_sub_request_cb, arg);
 
     if(err != ERR_OK) {
-      printf("mqtt_subscribe return: %d\n", err);
+      sprintf(txBuf, "mqtt_subscribe return: %d\n", err);
+      CDC_Transmit_FS(txBuf, strlen(txBuf));
     }
   } else {
-    printf("mqtt_connection_cb: Disconnected, reason: %d\n", status);
+    sprintf(txBuf, "mqtt_connection_cb: Disconnected, reason: %d\n", status);
+	CDC_Transmit_FS(txBuf, strlen(txBuf));
 
     /* Its more nice to be connected, so try to reconnect */
     example_do_connect(client);
@@ -109,7 +170,8 @@ void example_do_connect(mqtt_client_t *client)
 
   /* For now just print the result code if something goes wrong */
   if(err != ERR_OK) {
-    printf("mqtt_connect return %d\n", err);
+    sprintf(txBuf, "mqtt_connect return %d\n", err);
+	CDC_Transmit_FS(txBuf, strlen(txBuf));
   }
 }
 
@@ -118,7 +180,8 @@ void example_do_connect(mqtt_client_t *client)
 static void mqtt_pub_request_cb(void *arg, err_t result)
 {
   if(result != ERR_OK) {
-    printf("Publish result: %d\n", result);
+    sprintf(txBuf, "Publish result: %d\n", result);
+    CDC_Transmit_FS(txBuf, strlen(txBuf));
   }
 }
 
@@ -180,7 +243,7 @@ int main(void)
   MX_GPIO_Init();
   MX_LWIP_Init();
   MX_TIM3_Init();
-  MX_USB_OTG_FS_PCD_Init();
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_Base_Start_IT(&htim3);
@@ -199,6 +262,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
 	  MX_LWIP_Process();
+
   }
   /* USER CODE END 3 */
 }
@@ -288,41 +352,6 @@ static void MX_TIM3_Init(void)
   /* USER CODE BEGIN TIM3_Init 2 */
 
   /* USER CODE END TIM3_Init 2 */
-
-}
-
-/**
-  * @brief USB_OTG_FS Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USB_OTG_FS_PCD_Init(void)
-{
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 0 */
-
-  /* USER CODE END USB_OTG_FS_Init 0 */
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 1 */
-
-  /* USER CODE END USB_OTG_FS_Init 1 */
-  hpcd_USB_OTG_FS.Instance = USB_OTG_FS;
-  hpcd_USB_OTG_FS.Init.dev_endpoints = 4;
-  hpcd_USB_OTG_FS.Init.speed = PCD_SPEED_FULL;
-  hpcd_USB_OTG_FS.Init.dma_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
-  hpcd_USB_OTG_FS.Init.Sof_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.low_power_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.lpm_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.vbus_sensing_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.use_dedicated_ep1 = DISABLE;
-  if (HAL_PCD_Init(&hpcd_USB_OTG_FS) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USB_OTG_FS_Init 2 */
-
-  /* USER CODE END USB_OTG_FS_Init 2 */
 
 }
 
